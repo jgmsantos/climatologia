@@ -86,7 +86,7 @@ if selected == 'Focos de queimadas':
             st.plotly_chart(fig)
 
         except FileNotFoundError:
-            st.error("Arquivo merge.nc não encontrado. Verifique o caminho do arquivo.")
+            st.error("Arquivo clima_focos_espacial.nc não encontrado. Verifique o caminho do arquivo.")
         except Exception as e:
             st.error(f"Ocorreu um erro ao processar o arquivo: {e}")
 
