@@ -37,7 +37,7 @@ if selected == 'Focos de queimadas':
         st.write('Mapa de focos de queimadas')
         try:
             # Abrir o arquivo NetCDF
-            ds = xr.open_dataset("/mnt/c/Users/guilherme.martins/guilherme/streamlit/climatologia/output/clima_focos_espacial.nc")
+            ds = xr.open_dataset("../output/clima_focos_espacial.nc")
 
             # Converter as coordenadas 'longitude' e 'latitude' para 'lon' e 'lat'
             #ds = ds.rename({'longitude': 'lon', 'latitude': 'lat'})
