@@ -29,6 +29,10 @@ with st.sidebar:
                 }
     )
     
+# Inicializar o estado de "df".
+if "ds" not in st.session_state:
+    st.session_state.df = None
+    
 if selected == 'Focos de queimadas':
     st.title('Focos de queimadas')
     tab1, tab2 = st.tabs(['Espacial', 'Série temporal'])
@@ -36,8 +40,10 @@ if selected == 'Focos de queimadas':
     with tab1:
         st.write('Mapa de focos de queimadas')
         try:
+            if st.session_state.df is not None:
+                df = st.session_state.df            
             # Abrir o arquivo NetCDF
-            ds = xr.open_dataset("../output/clima_focos_espacial.nc")
+            ds = xr.open_dataset("clima_focos_espacial.nc")
 
             # Converter as coordenadas 'longitude' e 'latitude' para 'lon' e 'lat'
             #ds = ds.rename({'longitude': 'lon', 'latitude': 'lat'})
