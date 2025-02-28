@@ -42,47 +42,47 @@ if selected == 'Focos de queimadas':
         try:
             if st.session_state.ds is not None:
                 ds = st.session_state.ds
-            # Abrir o arquivo NetCDF
-            ds = xr.open_dataset("clima_focos_espacial.nc")
-            # Converter as coordenadas 'longitude' e 'latitude' para 'lon' e 'lat'
-            #ds = ds.rename({'longitude': 'lon', 'latitude': 'lat'})
-            # Criar uma lista de meses disponíveis no dataset
-            months = list(ds['time'].dt.month.values)
-            # Remover duplicatas da lista de meses
-            months = list(dict.fromkeys(months))
-            # Criar um seletor de mês
-            selected_month = st.selectbox('Selecione o mês', months)
-            # Filtrar o dataset para o mês selecionado
-            ds_month = ds.sel(time=ds['time.month'] == selected_month)
-            # Adicionar o token do Mapbox
-            px.set_mapbox_access_token('YOUR_MAPBOX_ACCESS_TOKEN')
-   
-            # Criar o mapa usando plotly express
-            fig = px.density_mapbox(
-                data_frame=ds_month.to_dataframe().reset_index(),
-                lat='lat',
-                lon='lon',
-                z='nf',
-                radius=7,
-                center=dict(lat=-15, lon=-50),
-                zoom=2,
-                mapbox_style="stamen-terrain",
-                title=f'Focos de Queimadas - Mês {selected_month}',
-                color_continuous_scale='viridis'
-            )
-   
-            # Aumentar o tamanho da caixa do mapa
-            fig.update_layout(
-                width=800,
-                height=600
-            )
-            
-            fig.update_layout(
-                xaxis_title="Longitude",
-                yaxis_title="Latitude"
-            )
-                 # Exibir o mapa no Streamlit
-            st.plotly_chart(fig)
+                # Abrir o arquivo NetCDF
+                ds = xr.open_dataset("clima_focos_espacial.nc")
+                # Converter as coordenadas 'longitude' e 'latitude' para 'lon' e 'lat'
+                #ds = ds.rename({'longitude': 'lon', 'latitude': 'lat'})
+                # Criar uma lista de meses disponíveis no dataset
+                months = list(ds['time'].dt.month.values)
+                # Remover duplicatas da lista de meses
+                months = list(dict.fromkeys(months))
+                # Criar um seletor de mês
+                selected_month = st.selectbox('Selecione o mês', months)
+                # Filtrar o dataset para o mês selecionado
+                ds_month = ds.sel(time=ds['time.month'] == selected_month)
+                # Adicionar o token do Mapbox
+                px.set_mapbox_access_token('YOUR_MAPBOX_ACCESS_TOKEN')
+       
+                # Criar o mapa usando plotly express
+                fig = px.density_mapbox(
+                    data_frame=ds_month.to_dataframe().reset_index(),
+                    lat='lat',
+                    lon='lon',
+                    z='nf',
+                    radius=7,
+                    center=dict(lat=-15, lon=-50),
+                    zoom=2,
+                    mapbox_style="stamen-terrain",
+                    title=f'Focos de Queimadas - Mês {selected_month}',
+                    color_continuous_scale='viridis'
+                )
+       
+                # Aumentar o tamanho da caixa do mapa
+                fig.update_layout(
+                    width=800,
+                    height=600
+                )
+                
+                fig.update_layout(
+                    xaxis_title="Longitude",
+                    yaxis_title="Latitude"
+                )
+                     # Exibir o mapa no Streamlit
+                st.plotly_chart(fig)
 
         except FileNotFoundError:
             st.error("Arquivo clima_focos_espacial.nc não encontrado. Verifique o caminho do arquivo.")
