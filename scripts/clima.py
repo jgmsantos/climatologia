@@ -57,7 +57,7 @@ if selected == 'Focos de queimadas':
             # Adicionar o token do Mapbox
             px.set_mapbox_access_token('YOUR_MAPBOX_ACCESS_TOKEN')
    
-            # Criar o mapa usando plotly express
+            # Criar o mapa usando plotly express sem Mapbox
             fig = px.density_mapbox(
                 data_frame=ds_month.to_dataframe().reset_index(),
                 lat='lat',
@@ -66,7 +66,7 @@ if selected == 'Focos de queimadas':
                 radius=7,
                 center=dict(lat=-15, lon=-50),
                 zoom=2,
-                mapbox_style="stamen-terrain",
+                mapbox_style="open-street-map",
                 title=f'Focos de Queimadas - Mês {selected_month}',
                 color_continuous_scale='viridis'
             )
