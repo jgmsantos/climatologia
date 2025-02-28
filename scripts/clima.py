@@ -55,7 +55,7 @@ if selected == 'Focos de queimadas':
             # Filtrar o dataset para o mês selecionado
             ds_month = ds.sel(time=ds['time.month'] == selected_month)
             # Adicionar o token do Mapbox
-            px.set_mapbox_access_token('YOUR_MAPBOX_ACCESS_TOKEN')
+            #px.set_mapbox_access_token('YOUR_MAPBOX_ACCESS_TOKEN')
    
             # Criar o mapa usando plotly express sem Mapbox
             fig = px.density_mapbox(
