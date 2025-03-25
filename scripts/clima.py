@@ -42,7 +42,7 @@ if selected == 'Focos de queimadas':
         try:
             if st.session_state.ds is None:
                 # Abrir o arquivo NetCDF
-                st.session_state.ds = xr.open_dataset("clima_focos_espacial.nc")
+                st.session_state.ds = xr.open_dataset("input/clima_focos_espacial.nc")
             ds = st.session_state.ds
             # Converter as coordenadas 'longitude' e 'latitude' para 'lon' e 'lat'
             #ds = ds.rename({'longitude': 'lon', 'latitude': 'lat'})
@@ -58,6 +58,7 @@ if selected == 'Focos de queimadas':
             #px.set_mapbox_access_token('YOUR_MAPBOX_ACCESS_TOKEN')
    
             # Criar o mapa usando plotly express sem Mapbox
+            # https://plotly.com/python-api-reference/generated/plotly.express.density_mapbox.html
             fig = px.density_mapbox(
                 data_frame=ds_month.to_dataframe().reset_index(),
                 lat='lat',
